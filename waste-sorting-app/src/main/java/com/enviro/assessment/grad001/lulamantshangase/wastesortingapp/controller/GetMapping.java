@@ -2,4 +2,6 @@ package com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.controlle
 
 public @interface GetMapping {
 
+    String value();
+
 }

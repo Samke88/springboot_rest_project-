@@ -1,10 +1,15 @@
 package com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore; // Import @JsonIgnore annotation
+
+@SuppressWarnings("unused")
 @Entity
 public class WasteCategory {
 
@@ -14,9 +19,6 @@ public class WasteCategory {
 
     private String name;
     private String description;
-    // Add any other attributes as needed
-
-    // Constructors, getters, and setters
 
     public WasteCategory() {
         // Default constructor
@@ -25,10 +27,6 @@ public class WasteCategory {
     public WasteCategory(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public WasteCategory(long l, String string, String string2) {
-        // TODO Auto-generated constructor stub
     }
 
     // Getters and setters
@@ -56,13 +54,26 @@ public class WasteCategory {
         this.description = description;
     }
 
-    public WasteCategory getWasteCategoryById(Long id2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWasteCategoryById'");
+    // These methods will be excluded from serialization
+    @JsonIgnore
+    public void getWasteCategoryById(Long id) {
+        // Implementation
     }
 
-    public List<WasteCategory> getAllWasteCategories() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllWasteCategories'");
+    @JsonIgnore
+    public void getAllWasteCategories() {
+        // Implementation
+    }
+
+    @JsonIgnore
+    public static void findById(Long categoryId) {
+        // Implementation
+    }
+
+    @JsonIgnore
+    public static void findAll() {
+        // Implementation
     }
 }
+
+

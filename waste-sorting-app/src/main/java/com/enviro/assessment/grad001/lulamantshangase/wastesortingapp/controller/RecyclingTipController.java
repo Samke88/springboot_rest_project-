@@ -1,23 +1,31 @@
+
 package com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model.RecyclingTip;
-// import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.service.RecyclingTipService;
+import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.service.RecyclingTipService;
+
 
 @RestController
-@RequestMapping("/recyclingtip")
+@RequestMapping("/recycling-tip")
 public class RecyclingTipController {
 
     @Autowired
-    private RecyclingTip recyclingTipService;
+    private RecyclingTipService recyclingTipService;
 
-    @GetMapping("/{wasteCategory}")
-    public RecyclingTip getRecyclingTipByWasteCategory(@PathVariable String wasteCategory) {
-        return recyclingTipService.getRecyclingTipByWasteCategory(wasteCategory);
+    @GetMapping
+    public ResponseEntity<RecyclingTip> getRecyclingTipByWasteCategory(@RequestParam String wasteCategory) {
+        RecyclingTip recyclingTip = recyclingTipService.getRecyclingTipByWasteCategory(wasteCategory);
+        if (recyclingTip != null) {
+            return ResponseEntity.ok(recyclingTip);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

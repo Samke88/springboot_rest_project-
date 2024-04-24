@@ -1,39 +1,39 @@
+/**
+ * Types of waste based on examples from:
+ * https://4waste.com.au/rubbish-removal/5-types-waste-know/
+ */
+
 package com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.service;
-
-import org.springframework.stereotype.Service;
-
 import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model.WasteCategory;
-
-// import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model.WasteCategory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WasteCategoryService {
 
-    // Hardcoded list of waste categories (for demonstration purposes)
-    private static List<WasteCategory> wasteCategories = new ArrayList<>();
+    private static final List<WasteCategory> wasteCategories = new ArrayList<>();
 
     static {
-        WasteCategoryService.add(new WasteCategory(1L, "Plastic", "Plastic waste description"));
-        wasteCategories.add(new WasteCategory(2L, "Paper", "Paper waste description"));
+        wasteCategories.add(new WasteCategory());
+        wasteCategories.add(new WasteCategory());
         // Add more waste categories as needed
     }
 
-    public WasteCategory getWasteCategoryById(Long id) {
+    public Optional<WasteCategory> getWasteCategoryById(Long id) {
         return wasteCategories.stream()
                 .filter(category -> category.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    private static void add(WasteCategory wasteCategory) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+                .findFirst();
     }
 
     public List<WasteCategory> getAllWasteCategories() {
-        return wasteCategories;
+        return new ArrayList<>(wasteCategories);
+    }
+
+    public WasteCategory createWasteCategory(WasteCategory wasteCategory) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createWasteCategory'");
     }
 }

@@ -1,36 +1,32 @@
 package com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.controller;
-import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model.WasteCategory;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model.WasteCategory;
+import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.service.WasteCategoryService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.Service.WasteCategoryService;
-
 import org.springframework.web.bind.annotation.RestController;
-
-import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.WasteCategory;
-
-import com.enviro.assessment.grad001.lulamantshangase.wastesortingapp.model.WasteCategory;
-
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/wastecategory")
 public class WasteCategoryController {
 
-    @Autowired
-    private WasteCategory wasteCategoryService;
+    private static final WasteCategoryService wasteCategoryService = null;
 
-    @GetMapping("/{id}")
-    public WasteCategory getWasteCategoryById(@PathVariable Long id) {
-        return wasteCategoryService.getWasteCategoryById(id);
-    }
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 
-    @GetMapping("/all")
-    public List<WasteCategory> getAllWasteCategories() {
-        return wasteCategoryService.getAllWasteCategories();
+    public ResponseEntity<WasteCategory> createWasteCategory(@RequestBody WasteCategory wasteCategory) {
+        WasteCategory createdCategory = wasteCategoryService.createWasteCategory(wasteCategory);
+        if (createdCategory != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(createdCategory);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
-}
+}  
