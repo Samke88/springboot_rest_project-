@@ -11,7 +11,7 @@ This Spring Boot application serves as the backend for a waste sorting mobile ap
 
 ## Setup
 1. Clone the Repository: `git clone <repository-url>`
-2. Navigate to the Project Directory**: `cd springboot_rest_project`
+2. Navigate to the Project Directory**: `cd waste-sorting-app`
 3. Run the Application: `mvn spring-boot:run`
 4. Access the APIs: Open a web browser or use tools like Postman to interact with the endpoints.
 
